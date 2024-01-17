@@ -39,9 +39,10 @@ namespace HallwayInfoPanelGMH {
         }
         if (HourNow == null) { classroom.currentPeople = " "; classroom.subject = "Neučí se."; classroom.currentTeacher = " "; }
         else {
-          classroom.currentPeople = HourNow.Element("Class")?.Element("Abbrev")?.Value;
-          classroom.subject = HourNow.Element("Subject")?.Element("Abbrev")?.Value == null ? "Neučí se." : HourNow.Element("Subject")?.Element("Abbrev")?.Value;
-          classroom.currentTeacher = HourNow.Element("Teacher")?.Element("Abbrev")?.Value;
+          XElement atom = HourNow.Element("Atoms").Elements().First();
+          classroom.currentPeople = atom.Element("Class")?.Element("Abbrev")?.Value;
+          classroom.subject = atom.Element("Subject")?.Element("Abbrev")?.Value == null ? "Neučí se." : HourNow.Element("Subject")?.Element("Abbrev")?.Value;
+          classroom.currentTeacher = atom.Element("Teacher")?.Element("Abbrev")?.Value;
         }
 
       }
