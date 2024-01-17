@@ -32,7 +32,7 @@ namespace HallwayInfoPanelGMH {
         XElement HourNow;
 
         if (dayIndex != -1) {
-          HourNow = timetable.Descendants("TimetableCell").FirstOrDefault(cell => { return ((int.Parse(cell.Element("DayIndex").Value) == dayIndex) || (int.Parse(cell.Element("HourIndex").Value) == hourIndex)); });
+          HourNow = timetable.Descendants("TimetableCell").FirstOrDefault(cell => { return ((int.Parse(cell.Element("DayIndex").Value) == dayIndex) && (int.Parse(cell.Element("HourIndex").Value) == hourIndex)); });
         } else {
           classroom.currentPeople = " "; classroom.subject = "Dnes se neučí."; classroom.currentTeacher = " ";
           continue;
@@ -86,9 +86,9 @@ namespace HallwayInfoPanelGMH {
       for (int i = 0; i < hours.Length; i++) {
         if (now > TimeSpan.Parse("15:50")) return -1;
 
-        if (now >= hours[i].BeginTime && now <= hours[i].EndTime) return hours[i].Caption;
+        if (now >= hours[i].BeginTime && now <= hours[i].EndTime) return hours[i].Caption+2;
 
-        if (now >= hours[i].EndTime && now <= hours[i + 1].BeginTime) return hours[i + 1].Caption;
+        if (now >= hours[i].EndTime && now <= hours[i + 1].BeginTime) return hours[i + 1].Caption+2;
       }
       return -1;
 
