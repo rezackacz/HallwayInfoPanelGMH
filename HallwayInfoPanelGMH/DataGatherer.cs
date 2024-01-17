@@ -37,12 +37,11 @@ namespace HallwayInfoPanelGMH {
           classroom.currentPeople = " "; classroom.subject = "Dnes se neučí."; classroom.currentTeacher = " ";
           continue;
         }
-        if (HourNow == null) { classroom.currentPeople = " "; classroom.subject = "Neučí se."; classroom.currentTeacher = " "; }
-        else {
+        if (HourNow == null) { classroom.currentPeople = " "; classroom.subject = "Neučí se."; classroom.currentTeacher = " "; } else {
           XElement atom = HourNow.Element("Atoms").Elements().First();
-          classroom.currentPeople = atom.Element("Class")?.Element("Abbrev")?.Value;
-          classroom.subject = atom.Element("Subject")?.Element("Abbrev")?.Value == null ? "Neučí se." : HourNow.Element("Subject")?.Element("Abbrev")?.Value;
-          classroom.currentTeacher = atom.Element("Teacher")?.Element("Abbrev")?.Value;
+          classroom.currentPeople = atom.Element("Class").Element("Abbrev").Value;
+          classroom.subject = atom.Element("Subject").Element("Abbrev").Value;
+          classroom.currentTeacher = atom.Element("Teacher").Element("Abbrev").Value;
         }
 
       }
@@ -59,61 +58,63 @@ namespace HallwayInfoPanelGMH {
         XElement HourNow;
 
         if (dayIndex != -1) {
-          HourNow = timetable.Descendants("TimetableCell").FirstOrDefault(cell => { return ((int.Parse(cell.Element("DayIndex").Value) == dayIndex) || (int.Parse(cell.Element("HourIndex").Value) == hourIndex)); });
+          HourNow = timetable.Descendants("TimetableCell").FirstOrDefault(cell => { return ((int.Parse(cell.Element("DayIndex").Value) == dayIndex) && (int.Parse(cell.Element("HourIndex").Value) == hourIndex)); });
         } else {
           classroom.currentPeople = " "; classroom.subject = "Dnes se neučí."; classroom.currentTeacher = " ";
           continue;
         }
         if (HourNow == null) { classroom.currentPeople = " "; classroom.subject = "Neučí se."; classroom.currentTeacher = " "; } else {
-          classroom.currentPeople = HourNow.Element("Class")?.Element("Abbrev")?.Value;
-          classroom.subject = HourNow.Element("Subject")?.Element("Abbrev")?.Value == null ? "Neučí se." : HourNow.Element("Subject")?.Element("Abbrev")?.Value;
-          classroom.currentTeacher = HourNow.Element("Teacher")?.Element("Abbrev")?.Value;
+          XElement atom = HourNow.Element("Atoms").Elements().First();
+          classroom.currentPeople = atom.Element("Class").Element("Abbrev").Value;
+          classroom.subject = atom.Element("Subject").Element("Abbrev").Value;
+          classroom.currentTeacher = atom.Element("Teacher").Element("Abbrev").Value;
         }
+        
       }
       result = classooms_copy;
       return result;
     }
 
-    public static int ReturnCurrentHourIndex(string xmlUrl) {
-      XElement dataInterface = XDocument.Load(xmlUrl).Element("BakalariDataInterface");
-      XElement hourDefinitions = dataInterface.Element("HourDefinitions");
-      var defs = hourDefinitions.Descendants("HourDefinition");
+      public static int ReturnCurrentHourIndex(string xmlUrl) {
+        XElement dataInterface = XDocument.Load(xmlUrl).Element("BakalariDataInterface");
+        XElement hourDefinitions = dataInterface.Element("HourDefinitions");
+        var defs = hourDefinitions.Descendants("HourDefinition");
 
-      var hours = defs.Select(hodina => new { Caption = int.Parse(hodina.Element("Caption").Value), BeginTime = TimeSpan.Parse(hodina.Element("BeginTime").Value), EndTime = TimeSpan.Parse(hodina.Element("EndTime").Value) }).ToArray();
+        var hours = defs.Select(hodina => new { Caption = int.Parse(hodina.Element("Caption").Value), BeginTime = TimeSpan.Parse(hodina.Element("BeginTime").Value), EndTime = TimeSpan.Parse(hodina.Element("EndTime").Value) }).ToArray();
 
-      TimeSpan now = DateTime.Now.TimeOfDay;
+        TimeSpan now = DateTime.Now.TimeOfDay;
 
-      for (int i = 0; i < hours.Length; i++) {
-        if (now > TimeSpan.Parse("15:50")) return -1;
+        for (int i = 0; i < hours.Length; i++) {
+          if (now > TimeSpan.Parse("15:50")) return -1;
 
-        if (now >= hours[i].BeginTime && now <= hours[i].EndTime) return hours[i].Caption+2;
+          if (now >= hours[i].BeginTime && now <= hours[i].EndTime) return hours[i].Caption + 2;
 
-        if (now >= hours[i].EndTime && now <= hours[i + 1].BeginTime) return hours[i + 1].Caption+2;
+          if (now >= hours[i].EndTime && now <= hours[i + 1].BeginTime) return hours[i + 1].Caption + 2;
+        }
+        return -1;
+
+
+
       }
-      return -1;
 
-
-
-    }
-
-    public static int ReturnCurrentDayIndex() {
-      switch (DateTime.Now.DayOfWeek) {
-        case DayOfWeek.Sunday:
-          return -1;
-        case DayOfWeek.Monday:
-          return 0;
-        case DayOfWeek.Tuesday:
-          return 1;
-        case DayOfWeek.Wednesday:
-          return 2;
-        case DayOfWeek.Thursday:
-          return 3;
-        case DayOfWeek.Friday:
-          return 4;
-        case DayOfWeek.Saturday:
-          return -1;
-        default: return -1;
+      public static int ReturnCurrentDayIndex() {
+        switch (DateTime.Now.DayOfWeek) {
+          case DayOfWeek.Sunday:
+            return -1;
+          case DayOfWeek.Monday:
+            return 0;
+          case DayOfWeek.Tuesday:
+            return 1;
+          case DayOfWeek.Wednesday:
+            return 2;
+          case DayOfWeek.Thursday:
+            return 3;
+          case DayOfWeek.Friday:
+            return 4;
+          case DayOfWeek.Saturday:
+            return -1;
+          default: return -1;
+        }
       }
     }
   }
-}
