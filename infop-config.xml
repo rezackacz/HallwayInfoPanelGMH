@@ -2,7 +2,7 @@
 <InfopanelConfiguration>
 	<BakalariURL>http://co2.gmh.cz</BakalariURL>
 	<StravaURL>https://www.strava.cz/strava5/Jidelnicky/XML?zarizeni=0059</StravaURL>
-	<HTMLFileFolder>C:\Users\Jachym\infop-output\</HTMLFileFolder>
+	<HTMLFileFolder>./</HTMLFileFolder>
 	<ClassroomGroups>
 		<ClassroomGroup>
 			<index>0</index>
