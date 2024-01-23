@@ -69,7 +69,8 @@ namespace HallwayInfoPanelGMH {
     }
 
     private void download() {
-      this.xml = XDocument.Load(URL);
+      try { this.xml = XDocument.Load(URL); }
+      catch(System.Net.Http.HttpRequestException e) { this.xml = null; Console.Error.WriteLine(e.Message); }
       XElement? xNjidelnicek = (XElement)xml.FirstNode;
       this.today = (XElement)xNjidelnicek?.FirstNode;
 
