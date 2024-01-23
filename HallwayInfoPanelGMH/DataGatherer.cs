@@ -15,11 +15,13 @@ namespace HallwayInfoPanelGMH
 
     string bakaServerURL;
 
+    XElement? roomListXML;
+
     public BakaDataGatherer(List<Classroom> classrooms, string bakaServerURL)
     {
       try
       {
-        XElement? roomListXML = XDocument.Load(bakaServerURL + "/b/common/rooms").Element("BakalariDataInterface");
+        roomListXML = XDocument.Load(bakaServerURL + "/b/common/rooms").Element("BakalariDataInterface");
       }
       catch (Exception e)
       {
