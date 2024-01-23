@@ -37,7 +37,7 @@ namespace HallwayInfoPanelGMH {
       result = "<div class=\"table-row\">";
       result += "<div style=\"text-align: left;\"><b>" + this.dispName + "</b></div>";
       result += "<div style=\"text-align: center;\">" + this.currentPeople + "</div>";
-      result += "<div style=\"text-align: center;\">" + this.subject + "</div>";
+      result += "<div class=\"subject\">" + this.subject + "</div>";
       result += "<div style=\"text-align: right;\">" + this.currentTeacher + "</div>";
 
       return result;

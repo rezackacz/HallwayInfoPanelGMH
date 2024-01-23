@@ -124,8 +124,8 @@ namespace HallwayInfoPanelGMH {
       string result;
 
       result = "<div class=\"table-row\">";
-      result += "<div><b>" + food.druh + "</b></div>";
-      result += "<div style=\"text-align: right;\">" + food.nazev + "</div>";
+      result += "<div class=\"meal-name\"><b>" + food.druh + "</b></div>";
+      result += "<div class=\"meal-description\">" + food.nazev + "</div>";
       result += "</div>";
       return result;
     }
