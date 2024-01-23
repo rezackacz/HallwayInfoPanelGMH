@@ -20,7 +20,7 @@ namespace HallwayInfoPanelGMH {
 
 
     private string URL;
-    private XDocument xml;
+    private XDocument? xml = null;
     private XElement? today;
 
     public string PageTitle;
@@ -71,12 +71,12 @@ namespace HallwayInfoPanelGMH {
     private void download() {
       try { this.xml = XDocument.Load(URL); }
       catch(System.Net.Http.HttpRequestException e) { this.xml = null; Console.Error.WriteLine(e.Message); }
-      XElement? xNjidelnicek = (XElement)xml.FirstNode;
+      XElement? xNjidelnicek = (XElement)xml?.FirstNode;
       this.today = (XElement)xNjidelnicek?.FirstNode;
 
       string date = DateTime.Now.ToString("dd-MM-yyyy");
 
-      if (!today.Attribute("datum").Value.Equals(date)) {
+      if (today == null || !today.Attribute("datum").Value.Equals(date)) {
         PageTitle = "Dnešní jídelníček neexistuje v databázi.";
         Console.Error.WriteLine("Error: today's menu doesn't exist in database.");
         this.polevka = new Jidlo("Něco se pokazilo", "Polévka");

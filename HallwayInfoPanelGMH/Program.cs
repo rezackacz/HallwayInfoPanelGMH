@@ -15,6 +15,8 @@ namespace HallwayInfoPanelGMH {
     static string htmlOutFolder;
 
     static void Main(string[] args) {
+      START:
+
 
       if (args.Length < 1) { Console.WriteLine("Použití: HallwayInfoPanelGMH (cesta k config souboru)"); return; }
 
@@ -42,7 +44,13 @@ namespace HallwayInfoPanelGMH {
           ListClsGroup.Add(classroom);
         }
 
-        Gatherers.Add(new(ListClsGroup, bakaServerURL));
+        try {
+          Gatherers.Add(new(ListClsGroup, bakaServerURL));
+        } catch(Exception ex) {
+          Console.WriteLine(ex.Message);
+          goto START;
+        }
+
         Renderers.Add(new(ListClsGroup, htmlOutFolder + "classroomGroup" + XElementClsGroup.Element("index").Value + ".html", "Aktuální rozvrh"));
 
         ListClsGroups.Add(ListClsGroup);
@@ -51,7 +59,7 @@ namespace HallwayInfoPanelGMH {
       Console.WriteLine("First render finished at:" + DateTime.Now);
 
       while (true) {
-        System.Threading.Thread.Sleep(10000);
+        System.Threading.Thread.Sleep(500);
 
         jidloStahovac.update();
         foodRenderer.RenderAndSaveAsHTML(jidloStahovac);
@@ -69,5 +77,8 @@ namespace HallwayInfoPanelGMH {
 
 
     }
+
+    
+
   }
 }
