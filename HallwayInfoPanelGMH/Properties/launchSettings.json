@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "HallwayInfoPanelGMH": {
-      "commandName": "Project",
-      "commandLineArgs": "C:\\Users\\Jachym\\infop-config.xml"
-    }
-  }
-}
