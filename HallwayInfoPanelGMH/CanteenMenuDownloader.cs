@@ -79,11 +79,11 @@ namespace HallwayInfoPanelGMH {
       if (today == null || !today.Attribute("datum").Value.Equals(date)) {
         PageTitle = "Dnešní jídelníček neexistuje v databázi.";
         Console.Error.WriteLine("Error: today's menu doesn't exist in database.");
-        this.polevka = new Jidlo("Něco se pokazilo", "Polévka");
-        this.jidlo1 = new Jidlo("Něco se pokazilo", "Oběd 1S");
-        this.jidlo2 = new Jidlo("Něco se pokazilo", "Oběd 2S");
-        this.jidlo3 = new Jidlo("Něco se pokazilo", "Oběd 3S");
-        this.doplnek = new Jidlo("Něco se pokazilo", "Doplněk");
+        this.polevka = new Jidlo("Není k dispozici", "Polévka");
+        this.jidlo1 = new Jidlo("Není k dispozici", "Oběd 1S");
+        this.jidlo2 = new Jidlo("Není k dispozici", "Oběd 2S");
+        this.jidlo3 = new Jidlo("Není k dispozici", "Oběd 3S");
+        this.doplnek = new Jidlo("Není k dispozici", "Doplněk");
       } else {
         this.PageTitle = "Dnešní jídelníček";
 
