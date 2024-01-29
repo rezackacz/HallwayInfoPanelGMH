@@ -108,7 +108,7 @@ namespace HallwayInfoPanelGMH {
     public string toDivTableString() {
       string result;
 
-      result = "<div class=\"table-container\">";
+      result = "<div class=\"menu-container\">";
       result += toDivRowString(polevka);
       result += toDivRowString(jidlo1);
       result += toDivRowString(jidlo2);
@@ -123,7 +123,7 @@ namespace HallwayInfoPanelGMH {
     internal string toDivRowString(Jidlo food) {
       string result;
 
-      result = "<div class=\"table-row\">";
+      result = "<div class=\"menu-row\">";
       result += "<div class=\"meal-name\"><b>" + food.druh + "</b></div>";
       result += "<div class=\"meal-description\">" + food.nazev + "</div>";
       result += "</div>";
