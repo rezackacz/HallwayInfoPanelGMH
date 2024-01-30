@@ -1,4 +1,10 @@
-﻿namespace HallwayInfoPanelGMH {
+﻿using System.Diagnostics;
+using System.Linq;
+using System.Text.Json;
+using System.Xml.Linq;
+
+
+namespace HallwayInfoPanelGMH {
   internal class Program {
 
     static string bakaServerURL;
