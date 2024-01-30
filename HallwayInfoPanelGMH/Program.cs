@@ -1,10 +1,4 @@
-﻿using System.Diagnostics;
-using System.Linq;
-using System.Text.Json;
-using System.Xml.Linq;
-
-
-namespace HallwayInfoPanelGMH {
+﻿namespace HallwayInfoPanelGMH {
   internal class Program {
 
     static string bakaServerURL;
@@ -15,7 +9,7 @@ namespace HallwayInfoPanelGMH {
     static string htmlOutFolder;
 
     static void Main(string[] args) {
-      START:
+    START:
 
 
       if (args.Length < 1) { Console.WriteLine("Použití: HallwayInfoPanelGMH (cesta k config souboru)"); return; }
@@ -46,7 +40,7 @@ namespace HallwayInfoPanelGMH {
 
         try {
           Gatherers.Add(new(ListClsGroup, bakaServerURL));
-        } catch(Exception ex) {
+        } catch (Exception ex) {
           Console.WriteLine(ex.Message);
           goto START;
         }
@@ -70,7 +64,7 @@ namespace HallwayInfoPanelGMH {
 
         Console.WriteLine("Render finished at:" + DateTime.Now);
 
-        
+
       }
 
 
@@ -78,7 +72,7 @@ namespace HallwayInfoPanelGMH {
 
     }
 
-    
+
 
   }
 }
