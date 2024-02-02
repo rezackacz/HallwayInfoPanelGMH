@@ -37,7 +37,7 @@ namespace HallwayInfoPanelGMH {
     private static Jidlo vyfiltruj (XElement today, string druh) {
       Jidlo vysledek = new Jidlo();
       XElement? xElement = today.Elements("jidlo").FirstOrDefault(food => food?.Attribute("druh")?.Value == druh);
-      if (xElement == null) { throw new FoodNotAvailableException("Jidlo " + druh + "se nepodarilo ziskat"); } else {
+      if (xElement == null) { vysledek.druh = "N/A"; vysledek.nazev = "N/A"; return vysledek; } else {
         vysledek.druh = druh;
         vysledek.nazev = xElement.Attribute("nazev").Value;
         return vysledek;
