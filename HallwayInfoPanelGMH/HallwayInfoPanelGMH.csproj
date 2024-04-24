@@ -8,6 +8,7 @@
     <Configurations>Debug;Release;RPi</Configurations>
     <Platforms>AnyCPU;ARM64</Platforms>
     <PublishAot>True</PublishAot>
+    <StartupObject>HallwayInfoPanelGMH.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
