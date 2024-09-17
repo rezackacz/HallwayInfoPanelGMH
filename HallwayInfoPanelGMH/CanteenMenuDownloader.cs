@@ -90,13 +90,13 @@ namespace HallwayInfoPanelGMH {
         Jidlo jidloTemp = vyfiltruj(today, "Polévka ");
         if (jidloTemp == null) this.polevka = new Jidlo("Není k dispozici", "Polévka"); else this.polevka = jidloTemp;
 
-        jidloTemp = vyfiltruj(today, "Oběd 1S ");
+        jidloTemp = vyfiltruj(today, "Oběd S1 ");
         if (jidloTemp == null) this.jidlo1 = new Jidlo("Není k dispozici", "Oběd 1S"); else this.jidlo1 = jidloTemp;
 
-        jidloTemp = vyfiltruj(today, "Oběd 2S ");
+        jidloTemp = vyfiltruj(today, "Oběd S2 ");
         if (jidloTemp == null) this.jidlo2 = new Jidlo("Není k dispozici", "Oběd 2S"); else this.jidlo2 = jidloTemp;
 
-        jidloTemp = vyfiltruj(today, "Oběd 3S ");
+        jidloTemp = vyfiltruj(today, "Oběd S3 ");
         if (jidloTemp == null) this.jidlo3 = new Jidlo("Není k dispozici", "Oběd 3S"); else this.jidlo3 = jidloTemp;
 
         jidloTemp = vyfiltruj(today, "Doplněk ");
